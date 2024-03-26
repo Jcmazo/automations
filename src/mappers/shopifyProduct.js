@@ -11,14 +11,15 @@
 export function shopifyMapper ({ data }) {
   let taxable = 'No'
   let barcode = ''
-  let active = 'No'
+  let active = data.status
   const name = data.title
 
-  if (data.status === 'active') {
-    active = 'Si'
+  if (!data.status) {
+    active = ''
   }
 
   const products = data.variants.map(item => {
+    const price = Number.parseFloat(item.price)
     if (item.taxable) {
       taxable = 'Si'
     }
@@ -30,9 +31,11 @@ export function shopifyMapper ({ data }) {
     const product = {
       productId: `${item.product_id}`,
       variantsId: `${item.id}`,
+      inventoryId: item.inventory_item_id,
       name: data.variants.length === 1 ? name : `${name} ${item.title}`.trim(),
       barcode,
       sku: item.sku ? item.sku : '',
+      price,
       taxable,
       active
     }

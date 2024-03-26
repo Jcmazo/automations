@@ -14,7 +14,7 @@ class ShopifyProduct {
     const { status: statusCode, data: { products }, headers } = await ShopifyServiceHelper.getProducts({
       url: URL_SHOPIFY,
       token,
-      filter: { limit: 250, status: 'active' }
+      filter: { limit: 250 }
     })
 
     if (statusCode >= 400) {
