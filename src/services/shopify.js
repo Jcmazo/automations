@@ -5,14 +5,12 @@ import ShopifyServiceHelper from '../helpers/ShopifyServiceHelper.js'
 import { shopifyMapper } from '../mappers/shopifyProduct.js'
 import CSV from '../utils/csv.js'
 
-const { URL_SHOPIFY, TOKEN_SHOPIFY } = process.env
-
 class ShopifyProduct {
-  static async getProductsShopify () {
+  static async getProductsShopify (data) {
+    const { url, token } = data
     const productsData = []
-    const token = TOKEN_SHOPIFY
     const { status: statusCode, data: { products }, headers } = await ShopifyServiceHelper.getProducts({
-      url: URL_SHOPIFY,
+      url,
       token,
       filter: { limit: 250 }
     })
