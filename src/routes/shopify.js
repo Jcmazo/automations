@@ -1,11 +1,17 @@
 'use strict'
 
-import { getProductsShopify } from '../controllers/Shopify.js'
+import { getProductsShopify, getVariants } from '../controllers/Shopify.js'
 
 const api = '/api/v1/shopify'
 
 async function shopifyRoutes (app) {
-  app.get(`${api}`, getProductsShopify)
+  app.post(`${api}`, async (req, res) => {
+    await getProductsShopify(req, res)
+  })
+
+  app.post(`${api}/variants`, async (req, res) => {
+    await getVariants(req, res)
+  })
 }
 
 export default shopifyRoutes

@@ -49,6 +49,9 @@
     "helmet": "^7.1.0",
     "pino": "^8.19.0",
     "pino-pretty": "^10.3.1",
-    "query-string": "^9.0.0"
+    "query-string": "^9.1.0"
+  },
+  "eslintConfig": {
+    "extends": "standard"
   }
 }
