@@ -12,8 +12,7 @@ const { SIIGO_API_URL } = process.env
  * Shopify API functionalities
  */
 class SiigoServiceHelper {
-
-    /**
+  /**
    * Siigo authentication
    *
    * @param {String} username
@@ -29,13 +28,13 @@ class SiigoServiceHelper {
    */
   static auth ({ username, accessKey }) {
     return post(`${SIIGO_API_URL}/auth`,
-    JSON.stringify({ username, access_key: accessKey }),
-    {
-      headers: {
-        'content-type': 'application/json',
-        'Partner-Id': 'savia'
-      }
-    })
+      JSON.stringify({ username, access_key: accessKey }),
+      {
+        headers: {
+          'content-type': 'application/json',
+          'Partner-Id': 'savia'
+        }
+      })
   }
 
   /**
@@ -63,7 +62,7 @@ class SiigoServiceHelper {
     )
   }
 
-    /**
+  /**
    * siigo get product next
    *
    * @param {Object} params

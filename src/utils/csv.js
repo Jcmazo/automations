@@ -31,7 +31,6 @@ class CSV {
     fs.writeFileSync(filePath, csvContent)
 
     logger.info(`The data.csv file has been successfully created in: ${filePath}`)
-    // console.log(`The data.csv file has been successfully created in: ${filePath}`)
   }
 }
 
