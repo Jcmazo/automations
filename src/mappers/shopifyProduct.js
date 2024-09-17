@@ -45,3 +45,21 @@ export function shopifyMapper ({ data }) {
 
   return { products }
 }
+
+/**
+ * Mapper varinats to shopify
+ *
+ *
+ * @returns {object}
+ */
+export function shopifyVariantMapper ({ data }) {
+  const products = data.variants.map(item => {
+    const product = {
+      title: item.title
+    }
+
+    return product
+  })
+
+  return { products }
+}

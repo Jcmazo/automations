@@ -10,12 +10,10 @@ class SiigoProduct {
     const { username, accessKey } = body
 
     const productsData = []
-    const { data: { access_token } } = await SiigoServiceHelper.auth({
+    const { data: { access_token: token } } = await SiigoServiceHelper.auth({
       username,
       accessKey
     })
-
-const token =  access_token
 
     const { status: statusCode, data } = await SiigoServiceHelper.getProducts({
       token,
@@ -47,7 +45,7 @@ const token =  access_token
     const productsData = []
     for (const productToMap of data) {
       try {
-        const { product } = await this.#mapperProducts( productToMap )
+        const { product } = await this.#mapperProducts(productToMap)
         productsData.push(product)
       } catch (err) {
         logger.fatal('Error in mapperProducts')
@@ -59,7 +57,7 @@ const token =  access_token
 
   static async #mapperProducts (productToMap) {
     try {
-      const  product  = await this.#buildProducts(productToMap)
+      const product = await this.#buildProducts(productToMap)
       return product
     } catch (err) {
       logger.fatal('Error in buildProducts')
@@ -70,7 +68,7 @@ const token =  access_token
     const productsData = []
     let url = link.next.href
     while (url) {
-      const { status: statusCode, data} = await SiigoServiceHelper.getProductsNext({
+      const { status: statusCode, data } = await SiigoServiceHelper.getProductsNext({
         url,
         token
       })
@@ -82,7 +80,7 @@ const token =  access_token
       const productsProcess = await this.#processProducts(data.results)
       productsData.push(...productsProcess)
 
-      url = await this.#getUrlNext({link: data._links})
+      url = await this.#getUrlNext({ link: data._links })
     }
     return productsData
   }
@@ -91,13 +89,12 @@ const token =  access_token
     return siigoMapper({ data })
   }
 
-  static async #getUrlNext({ link }) {
+  static async #getUrlNext ({ link }) {
     if (link && link.next && link.next.href) {
       return link.next.href
     }
     return null
   }
-
 }
 
 export default SiigoProduct

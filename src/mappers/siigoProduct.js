@@ -11,7 +11,7 @@
 export function siigoMapper ({ data }) {
   let active = 'No'
 
-  if (data.active){
+  if (data.active) {
     active = 'Si'
   }
 
@@ -26,7 +26,7 @@ export function siigoMapper ({ data }) {
     name: data.name,
     sku: data.code ? data.code : '',
     tax,
-    active,
+    active
   }
 
   return { product }
